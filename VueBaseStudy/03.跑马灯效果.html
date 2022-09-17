@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="./lib/vue.js"></script>
+</head>
+<body>
+    <!-- 创建一个控制的区域 -->
+    <div id="app">
+        <input type="button" value="浪起来" @click="lang">
+        <input type="button" value="暂停" @click="stop">
+        <h5>{{msg}}</h5>
+    </div>
+    <script>
+        // 在vm实例中，如果想要获取 data 上的数据，或者 想要调用 methods 中的 方法，必须通过
+        // this 数据属性名 或 this 方法名 来进行访问，这里的this, 就表示我们new 出来的vm 实例对象
+        var vm=new Vue({
+            el:'#app',
+            data:{
+                msg:"猥琐发育,别浪！！！！",
+                intervalid:null//在data 上定义 定时器id
+            },
+            methods:{
+                lang(){
+                    //console.log(this.msg)
+                   if(this.intervalid!=null) return;
+
+                    // //定时器
+                    // setInterval(function() {        
+                    //      //this 指向问题
+                    //     //获取到头的第一个字符
+                    //     var startstring=this.msg.substring(0,1)
+                    //     //获取到后的所有字符
+                    //     var endstring=this.msg.substring(1)
+                    //     //重新拼接得到新字符串，并赋值给this.msg
+                    //     this.msg=endstring+startstring
+                    // }, 300);
+
+                    // 定时器
+                    //() => 建造函数解决this 指向问题
+                    this.intervalid=setInterval(() => {        
+                         //this 指向问题
+                        //获取到头的第一个字符
+                        var startstring=this.msg.substring(0,1)
+                        //获取到后的所有字符
+                        var endstring=this.msg.substring(1)
+                        //重新拼接得到新字符串，并赋值给this.msg
+                        this.msg=endstring+startstring
+                    }, 300);
+                    //注意：vm实例，会监听自己生成的data 中所有数据的改变，只要数据一发生变化，就会自动把 
+                    //最新的数据，从data上同步到页面中去；【好处：程序员只需要关系数据，不需要考虑如何重新渲染DOM页面】
+                },
+                stop(){
+                    clearInterval(this.intervalid)
+                    //每当清除了定时器之后，需要重新把intervalid赋值为null
+                    this.intervalid=null
+                }
+            }
+        })
+
+    //分析
+    </script>
+</body>
+</html>

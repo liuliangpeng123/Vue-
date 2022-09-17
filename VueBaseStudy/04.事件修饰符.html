@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="./lib/vue.js"></script>
+    <style>
+        .inner {
+            height: 200px;
+            background-color: blue;
+        }
+
+        .outinner {
+            padding: 20px;
+            background-color: yellowgreen;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- 定义一个区域 -->
+    <!-- 事件修饰符 -->
+    <!-- .stop 阻止冒泡 -->
+    <!-- .prevent 阻止默认事件 -->
+    <!-- .capture 添加事件倾听器式时使用事件捕获模式 -->
+    <!-- .self 只当事件在该元素本身(比如不是子元素)触发时触发回调 -->
+    <div id="app">
+        <!-- 使用.stop 阻止冒泡 -->
+        <!-- <div class="inner" @click="divhandle">
+            <input type="button" value="点击" @click.stop="btnHandle">
+        </div> -->
+
+        <!--  <a href="https://www.baidu.com/" @click.prevent="linkclick">有问题，就找我</a>-->
+
+        <!-- 使用  .capture 实现铺货触发事件 -->
+        <!-- <div class="inner" @click.capture="divhandle">
+            <input type="button" value="点击" @click="btnHandle">
+        </div> -->
+
+        <!-- 使用  .self 实现只有点击当前元素时候，才会触发的事件处理函数 -->
+        <!-- <div class="inner" @click.self="divhandle">
+            <input type="button" value="点击" @click="btnHandle">
+        </div> -->
+        <!-- 使用 .once只触发一次事件 -->
+        <!--  --><a href="https://www.baidu.com/" @click.prevent.once="linkclick">有问题，就找我</a>
+
+        <!-- .self只会阻止自己身上的冒泡行为，不会阻止其他的冒泡行为 -->
+        <!--<div class="outinner" @click="divhandle2">
+            <div class="inner" @click="divhandle">
+                <input type="button" value="点击" @click.stop="btnHandle">
+            </div>
+        </div> -->
+
+        <div class="outinner" @click="divhandle2">
+            <div class="inner" @click.self="divhandle">
+                <input type="button" value="点击" @click="btnHandle">
+            </div>
+        </div>
+
+    </div>
+    <script>
+        //创建一个vue实例区域
+        var vm = new Vue({
+            el: '#app',
+            data: {
+
+            },
+            methods: {
+                divhandle() {
+                    console.log("div点击了")
+                },
+                btnHandle() {
+                    console.log("触发按钮btn点击事件")
+                },
+                linkclick() {
+                    console.log("连接事件")
+                },
+                divhandle2() {
+                    console.log("触发了最外层div")
+                }
+            }
+        })
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="./lib/vue.js"></script>
+</head>
+
+<body>
+    <!-- 定义一个区域 -->
+    <div id="app">
+        <!-- <p v-for="item in list">{{item}}</p> -->
+        <!-- <p v-for="(item,i) in list">索引值:{{i}}---数值:{{item}}</p> -->
+        <!-- <p v-for="nn in listobj">用户id:{{nn.id}}--用户名称:{{nn.naem}}</p> -->
+        <p v-for="(nn,i) in listobj">索引:{{i}}---用户id:{{nn.id}}--用户名称:{{nn.naem}}</p>
+    </div>
+    <script>
+        //创建一个vue实例区域
+        var vm = new Vue({
+            el: '#app',
+            data: {
+                list: [1, 2, 3, 4, 5, 6, 7, 8, 9],
+                listobj: [{ id: 1, naem: "刘德华" }, { id: 2, naem: "张学友" }, { id: 3, naem: "留好" }]
+            },
+            methods: {}
+        })
+    </script>
+</body>
+
+</html>

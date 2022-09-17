@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="./lib/vue.js"></script>
+    <style>
+        .red {
+            color: red;
+            font-size: 80px;
+        }
+
+        .thin {
+            font-weight: 200;
+        }
+
+        .italic {
+            font-style: italic;
+        }
+
+        /* 对中文有作用 */
+        .active {
+            letter-spacing: 1.5em;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- 定义一个区域 -->
+    <div id="app">
+        <!-- <h6 class="red thin">有一个很大很大的鹏鹏</h6> -->
+        <!-- 第一种使用方式，直接传递一个数组，注意：这里的class 需要使用 v-bind 做数据绑定 -->
+        <!-- <h6 :class="['red','italic']">有一个很大很大的鹏鹏</h6> -->
+
+        <!-- 在数组中使用三元表达式 -->
+        <!-- <h6 :class="['red',flag?'italic':'']">有一个很大很大的鹏鹏</h6> -->
+
+        <!-- 在数组中使用 对象来代替三元表达式，提高代码的可读性 -->
+        <!-- <h6 :class="['red',{'italic':flag}]">有一个很大很大的鹏鹏</h6> -->
+
+        <!-- 在为class 使用v-bind 绑定对象的时候，对象的属性是类名，由于 对象的属性可带引号，也可以不带引号，
+            所以 这里我没有写引号；属性的值 是一个表示标识符 -->
+        <!-- <h6 :class="{'red':true,active:true,'italic':flag}">有一个很大很大的鹏鹏</h6> -->
+        <h6 :class="classobj">有一个很大很大的鹏鹏</h6>
+    </div>
+    <script>
+        //创建一个vue实例区域
+        var vm = new Vue({
+            el: '#app',
+            data: {
+                flag: true,
+                classobj: { red: true, active: true, italic: true }
+            },
+            methods: {}
+        })
+    </script>
+</body>
+
+</html>
